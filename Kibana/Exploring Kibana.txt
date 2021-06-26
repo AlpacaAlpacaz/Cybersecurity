@@ -1,0 +1,75 @@
+1. Add the sample web log data to Kibana.
+
+2. Answer the following questions:
+	In the last 7 days, how many unique visitors were located in India?
+		225
+
+	In the last 24 hours, of the visitors from China, how many were using Mac OSX?
+		8
+
+	In the last 2 days, what percentage of visitors received 404 errors? How about 503 errors?
+		404 - 0%
+		503 - 25%
+
+	In the last 7 days, what country produced the majority of the traffic on the website?
+		China
+
+	Of the traffic that's coming from that country, what time of day had the highest amount of activity?
+		9, 1, 2
+
+	List all the types of downloaded files that have been identified for the last 7 days, along with a short description of each file type (use Google if you aren't sure about a particular file type).
+		.gz - An archive file made by GNU
+		.css - Cascading Style SHeet, used to format a webpage
+		.zip - Another archive format
+		.deb - A software isntallation package
+		.rpm - Another isntallation package develeoped for Red Hat Linux
+
+3. Now that you have a feel for the data, Let's dive a bit deeper. Look at the chart that shows Unique Visitors Vs. Average Bytes.
+	Locate the time frame in the last 7 days with the most amount of bytes (activity).
+		June 13th 21:00
+	
+	In your own words, is there anything that seems potentially strange about this activity?
+		There was only 1 unique visitor but there was the most traffic out of all the other days by about double the amount which definitly makes this a suspicous moment.
+
+4. Filter the data by this event.
+	What is the timestamp for this event?
+		June 13th 21:00 - June 14th 0:00
+	
+	What kind of file was downloaded?
+		.rpm file
+	
+	From what country did this activity originate?
+		India
+	
+	What HTTP response codes were encountered by this visitor?
+		200
+
+5. Switch to the Kibana Discover page to see more details about this activity.
+	What is the source IP address of this activity?
+		35.143.166.159
+	
+	What are the geo coordinates of this activity?
+		-73.6103075, 43.34121
+	
+	What OS was the source machine running?
+		Windows 8
+	
+	What is the full URL that was accessed?
+		https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-6.3.2-i686.rpm
+	
+	From what website did the visitor's traffic originate?
+		http://facebook.com/success/jay-c-buckey
+
+6. Finish your investigation with a short overview of your insights.
+	What do you think the user was doing?
+		They were downloaded the install package for metricbeat.
+	
+	Was the file they downloaded malicious? If not, what is the file used for?
+		No it isn't malicious it is to isntall metricbeat.
+	
+	Is there anything that seems suspicious about this activity?
+		It is originating from India and going to China
+	
+	Is any of the traffic you inspected potentially outside of compliance guidelines?
+		Majority of the traffic to the site is from China and India and going to China and India
+	

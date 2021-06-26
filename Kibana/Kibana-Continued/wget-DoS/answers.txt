@@ -1,0 +1,2 @@
+Which of the VM metrics were affected the most from this traffic?
+	Inbound network spiked the hardest with outbound trailing it.
