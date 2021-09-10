@@ -61,7 +61,7 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
       - We have the ssh login for Michael from the first flag so we login with that again and run a find command to locate any files named flag
         - `ssh michael@192.168.1.110`
         - `find / -iname '*flag*' -type f -print 2>/dev/null`
-        - ![flag2](Images/flag2Location.png "Second flag location") 
+        - ![flag2 location](Images/flag2Location.png "Second flag location") 
         - We now know it is stored in /var/www/flag2.txt
         - `cat /var/www/flag2.txt`
         - ![flag2](Images/flag2.png "Second flag") 
