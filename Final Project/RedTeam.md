@@ -9,25 +9,25 @@
 
 Nmap scan results for each machine reveal the below services and OS details:
 
+`$ nmap -sV -O 192.168.1.110`
+
 ![Initial Nmap Scan](Images/InitialNmapScan.png "Nmap Scan")
 
 This scan identifies the services below as potential points of entry:
 - Target 1
-  - Port 22: OpenSSH
-  - Port 80: Apache web server
-  - Port 111: rpcbind
-  - Port 139: Samba smbd
-  - Port 445: Samba smbd
-
-_TODO: Fill out the list below. Include severity, and CVE numbers, if possible._
-
-
+  - Port 22/TCP: OpenSSH
+  - Port 80/TCP: Apache web server
+  - Port 111/TCP: rpcbind
+  - Port 139/TCP: Samba smbd
+  - Port 445/TCP: Samba smbd
 
 The following vulnerabilities were identified on each target:
 - Target 1
-  - List of
-  - Critical
-  - Vulnerabilities
+  - Wordpress server is vulnerable to user enumeration
+  - Wordpress and ssh server have weak passwords
+  - MySQL password is stored in plain text
+  - Wordpress hashes are stored unsalted
+  - Steven user account has sudo permissions for Python
 
 ### Exploitation
 _TODO: Fill out the details below. Include screenshots where possible._
