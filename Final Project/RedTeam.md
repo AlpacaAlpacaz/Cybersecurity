@@ -55,12 +55,16 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
         - `ssh michael@192.168.1.110`
         - `cd /var/www/html`
         - `grep -nr 'flag1'`
-        - ![flag1](Images/flag1.png "First flag location") 
+        - ![flag1](Images/flag1.png "First flag") 
   - `flag2`: flag2{fc3fd58dcdad9ab23faca6e9a36e581c}
     - **Exploit Used**
-      - Metasploit ssh_login module using the usernames acquired from wpscan and a general password list
-	  - Hidden in /var/www/flag2.txt
-      - find / -iname '*flag*' -type f
+      - We have the ssh login for Michael from the first flag so we login with that again and run a find command to locate any files named flag
+        - `ssh michael@192.168.1.110`
+        - `find / -iname '*flag*' -type f -print 2>/dev/null`
+        - ![flag2](Images/flag2Location.png "Second flag location") 
+        - We now know it is stored in /var/www/flag2.txt
+        - `cat /var/www/flag2.txt`
+        - ![flag2](Images/flag2.png "Second flag") 
   - `flag3`: flag3{afc01ab56b50591e7dccf93122770cd2}
     - **Exploit Used**
       - Found the MySQL password in wp-config.php
