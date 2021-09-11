@@ -114,7 +114,7 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
       - `ssh steven@192.168.1.110`
       - We have to check the permissions of Steven's account
       - `sudo -l`
-      - ![Steven's Permissions](Images/StevensPerms.png "Steven's Permissions")
+      - ![Steven's Permissions](Images/StevenPerms.png "Steven's Permissions")
       - We now know that Steven can use sudo permissions for python so now we can exploit this by spawning a root bash shell
       - `sudo python -c 'import pty; pty.spawn("/bin/bash")'`
       - Now we run another seach for a flag file now that we have root permissions
@@ -151,5 +151,5 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
     - **Exploit Used**
       - From the find command used to locate the second command we know the location of the third flag as well
         - ![Target 2 Flag 2 and 3](Images/Target2Flag2.png "Target 2 Flag 2 and 3")
-        - We can now visit http://192.168.1.115/wordpress/wp-content/uploads/2018/11/flag3.png to see the third flag
+        - We can now visit `http://192.168.1.115/wordpress/wp-content/uploads/2018/11/flag3.png` to see the third flag
         - ![Target 2 Flag 3](Images/Target2Flag3.png "Target 2 Flag 3")
