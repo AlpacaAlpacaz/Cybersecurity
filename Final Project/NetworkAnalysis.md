@@ -75,3 +75,31 @@ Upload the file to VirusTotal.com. What kind of malware is this classified as?
     - We type `empty.gif?` into the search filter and we download the first file
     - After renaming the file to a png we see that we have found the desktop image
     - ![Infected PC Wallpaper](Images/InfectedDesktop.png "Infected PC Wallpaper")
+
+### Illegal Downloads
+
+- IT was informed that some users are torrenting on the network. The Security team does not forbid the use of torrents for legitimate purposes, such as downloading operating systems. However, they have a strict policy against copyright infringement.
+- IT shared the following about the torrent activity:
+    - The machines using torrents live in the range 10.0.0.0/24 and are clients of an AD domain.
+    - The DC of this domain lives at 10.0.0.2 and is named DogOfTheYear-DC.
+    - The DC is associated with the domain dogoftheyear.net.
+
+- Find the following information about the machine with IP address 10.0.0.201:
+    - MAC Address: 00:16:17:18:66:c8
+        - `ip.addr==10.0.0.201`
+        - ![Torrenting Machines MAC](Images/Torrent_MAC.png "Torrenting Machines MAC")
+    - Windows Username: elmer.blanco
+        - `ip.addr==10.0.0.201 and kerberos.CNameString and !(kerberos.CNameString contains $)`
+        - ![Torrenting Machines Username](Images/TorrentUsername.png "Torrenting Machines Username")
+    - OS Version: Windows 10
+        - `ip.addr==10.0.0.201 and http.request.method==GET`
+        - We take some form of HTTP traffic and we will check it for the User Agent
+        - Right click one of the packets and select Follow > TCP Stream
+        - ![Torrenting Machines OS](Images/Torrent_OS.png "Torrenting Machines OS")
+        - We know that Windows NT 10.0 is Windows 10
+
+- Which torrent file did the user download?
+    - We first go to File > Export Objects > HTTP
+    - We type `.torrent` into the search filter
+    - ![Torrenting Machine Download](Images/TorrentDownload.png "Torrenting Machine Download")
+    - We can now easily see that they downloaded `Betty_Boop_Rhythm_on_the_reservation.avi.torrent`
