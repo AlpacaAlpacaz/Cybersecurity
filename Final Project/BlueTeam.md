@@ -10,26 +10,26 @@
 ### Network Topology
 
 The following machines were identified on the network:
-- Name of VM 1
-  - Kali Linux
-  - Penetration Testing Machine
-  - 192.168.1.90
-- Name of VM 2
+- Kali
+  - **Operating System**: Kali Linux
+  - **Purpose**: Penetration Testing Machine
+  - **IP Address**: 192.168.1.90
+- ELK
   - **Operating System**:
-  - ELK
-  - 192.168.1.100
-- Name of VM 3
+  - **Purpose**: The ELK stack monitoring the targets
+  - **IP Address**: 192.168.1.100
+- Capstone
   - **Operating System**:
-  - Capstone
-  - 192.168.1.105
-- Name of VM 4
-  - Linux 3.2 - 4.9
-  - Target 1
-  - 192.168.1.110
-- Name of VM 5
-  - Linux 3.2 - 4.9
-  - Target 2
-  - 192.168.1.115
+  - **Purpose**: Testing alerts
+  - **IP Address**: 192.168.1.105
+- Target 1
+  - **Operating System**: Linux 3.2 - 4.9
+  - **Purpose**: The first target to exploit
+  - **IP Address**: 192.168.1.110
+- Target 2
+  - **Operating System**: Linux 3.2 - 4.9
+  - **Purpose**: An optional target to exploit
+  - **IP Address**: 192.168.1.115
 
 ### Description of Targets
 
