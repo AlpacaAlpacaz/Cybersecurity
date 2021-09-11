@@ -69,16 +69,29 @@ Alert 3 is implemented as follows:
   - **Reliability**: This is a high reliability alert because even if it is triggered when there is no attack happening it should still be investigated
 
 ### Suggestions for Going Further (Optional)
-_TODO_: 
-- Each alert above pertains to a specific vulnerability/exploit. Recall that alerts only detect malicious behavior, but do not stop it. For each vulnerability/exploit identified by the alerts above, suggest a patch. E.g., implementing a blocklist is an effective tactic against brute-force attacks. It is not necessary to explain _how_ to implement each patch.
 
-The logs and alerts generated during the assessment suggest that this network is susceptible to several active threats, identified by the alerts above. In addition to watching for occurrences of such threats, the network should be hardened against them. The Blue Team suggests that IT implement the fixes below to protect the network:
+- The logs and alerts generated during the assessment suggest that this network is susceptible to several active threats, identified by the alerts above. In addition to watching for occurrences of such threats, the network should be hardened against them. The Blue Team suggests that IT implement the fixes below to protect the network:
+
 - Vulnerability 1: Excessive HTTP Errors
-  - **Patch**: TODO: E.g., _install `special-security-package` with `apt-get`_
-  - **Why It Works**: TODO: E.g., _`special-security-package` scans the system for viruses every day_
+  - **Patch**: 
+    - Disable pretty permalinks in Wordpress
+    - Have users set a nickname for themselves that is different from their username
+    - Enforce a password policy of minimum 12 characters and encourage the use of random passwords and password managers
+  - **Why It Works**:
+    - Pretty permalinks is how WPScan is able to find the usernames in it's enumeration scan so disabling it will make it harder for it to find usernames
+    - When WPScan can't use permalinks it will scan for posts made by usernames but if you set a nickname for every account that is different from the username than WPScan can't find the proper usernames
+    - If WPScan finds the usernames and is running a bruteforce attack against the system than ensuring that the passwords are not ones that are found on common password lists is imperative
 - Vulnerability 2: HTTP Request Size Monitor
-  - **Patch**: TODO: E.g., _install `special-security-package` with `apt-get`_
-  - **Why It Works**: TODO: E.g., _`special-security-package` scans the system for viruses every day_
+  - **Patch**:
+    - Set a maximum length to certain HTTP tags in the header such as the length of a query
+  - **Why It Works**:
+    - Setting a max length will help to ensure that Cross Site Scripting isn't happening on your site
 - Vulnerability 3: CPU Usage Monitor
-  - **Patch**: TODO: E.g., _install `special-security-package` with `apt-get`_
-  - **Why It Works**: TODO: E.g., _`special-security-package` scans the system for viruses every day_
+  - **Patch**:
+    - Disable XML RPC for Wordpress
+    - Disable the REST API for Wordpress
+    - Implementing a Wordpress security plugin such as Sucuri
+  - **Why It Works**:
+    - XML RPC allows 3rd party apps to interact with your Wordpress site and can be a vector for a DDOS attack
+    - The REST API lets you interact with Wordpress data such as posting or deleting content on the site, this can also be used as a vector for a DDOS attack
+    - Adding a security plugin such as Sucuri will allow you to add a website firewall to the Wordpress site
