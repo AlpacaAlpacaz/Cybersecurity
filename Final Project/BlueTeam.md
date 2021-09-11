@@ -42,7 +42,7 @@ Target 1 is an Apache web server and has SSH enabled, so ports 80 and 22 are pos
 Traffic to these services should be carefully monitored. To this end, we have implemented the alerts below:
 
 #### Excessive HTTP Errors
-WHEN count() GROUPED OVER top 5 'http.response.status_code' IS ABOVE 400 FOR THE LAST 5 minutes
+`WHEN count() GROUPED OVER top 5 'http.response.status_code' IS ABOVE 400 FOR THE LAST 5 minutes`
 
 Alert 1 is implemented as follows:
   - **Metric**: WHEN count() GROUPED OVER top 5 'http.response.status_code'
@@ -51,7 +51,7 @@ Alert 1 is implemented as follows:
   - **Reliability**: Since it only counts error responces it should never fire under normal circumstances unless there is an attack ongoing against the system making it a high reliability alert.
 
 #### HTTP Request Size Monitor
-WHEN sum() of http.request.bytes OVER all documents IS ABOVE 3500 FOR THE LAST 1 minute
+`WHEN sum() of http.request.bytes OVER all documents IS ABOVE 3500 FOR THE LAST 1 minute`
 
 Alert 2 is implemented as follows:
   - **Metric**: WHEN sum() of http.request.bytes OVER all documents
@@ -60,7 +60,7 @@ Alert 2 is implemented as follows:
   - **Reliability**: There could be a legitimate reason for the HTTP request header to be extra large althought it would be under rare circumstance so this is a medium reliability alert
 
 #### CPU Usage Monitor
-WHEN max() OF system.process.cpu.total.pct OVER all documents IS ABOVE 0.5 FOR THE LAST 5 minutes
+`WHEN max() OF system.process.cpu.total.pct OVER all documents IS ABOVE 0.5 FOR THE LAST 5 minutes`
 
 Alert 3 is implemented as follows:
   - **Metric**: WHEN max() OF system.process.cpu.total.pct OVER all documents
