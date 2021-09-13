@@ -13,7 +13,7 @@
     - Their IP addresses are somewhere in the range 10.6.12.0/24.
 
 - **What is the domain name of the users' custom site?**
-    - `ip.addr==10.6.12.0/24 and dns.afsdb.hostname`
+    - `ip.addr==10.6.12.0/24 and dns.resp.name`
     - ![Frank and Ted's Domain](Images/DomainNameFrank.png "Frank and Ted's Domain")
     - The domain name is `Frank-n-Ted-DC.frank-n-ted.com`
 
