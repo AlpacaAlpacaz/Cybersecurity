@@ -43,7 +43,8 @@ The following vulnerabilities were identified:
 
 The following vulnerabilities were identified:
 - Target 2
----------------------------------------------COMPLETE
+  - Wordpress server is vulnerable to directory enumeration
+  - Wordpress server is vulnerable to xss
 
 ### Exploitation
 
